@@ -4,7 +4,6 @@ import com.store.storeAPI.products.Product;
 import com.store.storeAPI.receipts.Receipt;
 import com.store.storeAPI.receipts.ReceiptRepository;
 import jakarta.transaction.Transactional;
-import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
