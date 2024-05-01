@@ -71,7 +71,7 @@ public class CartService {
             if (product.getDiscountAmount() == null || product.getDiscountPrice() == null) {
                 totalPrice += receipt.getQuantity() * product.getPrice();
             } else {
-                int discountQuantity = Math.floorDiv(receipt.getQuantity(), product.getDiscountAmount());
+                int discountQuantity = receipt.getQuantity() / product.getDiscountAmount();
                 int fullPriceQuantity = receipt.getQuantity() - discountQuantity * product.getDiscountAmount();
                 System.out.println(fullPriceQuantity);
                 totalPrice += fullPriceQuantity * product.getPrice() + discountQuantity * product.getDiscountPrice();
