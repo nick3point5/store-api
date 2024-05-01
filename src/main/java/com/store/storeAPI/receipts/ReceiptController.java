@@ -18,7 +18,7 @@ public class ReceiptController {
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<Receipt> getProductById(@PathVariable("id") Long id) {
+	public ResponseEntity<Receipt> getReceiptById(@PathVariable("id") Long id) {
 		return ResponseEntity.ok(receiptService.getReceiptById(id));
 	}
 
@@ -28,28 +28,28 @@ public class ReceiptController {
 	}
 
 	@PutMapping("{id}")
-	public ResponseEntity<Receipt> updateProduct(@PathVariable(name = "id") Long id, @RequestBody Receipt receipt) {
+	public ResponseEntity<Receipt> updateReceipt(@PathVariable(name = "id") Long id, @RequestBody Receipt receipt) {
 		return ResponseEntity.ok(receiptService.updateReceipt(id, receipt));
 	}
 
 	@DeleteMapping("{id}")
-	public ResponseEntity<Void> deleteProduct(@PathVariable(name = "id") Long id) {
+	public ResponseEntity<Void> deleteReceipt(@PathVariable(name = "id") Long id) {
 		receiptService.deleteReceipt(id);
 		return ResponseEntity.ok().build();
 	}
 
 	@PostMapping("add")
-	public ResponseEntity<Receipt> addProduct(@RequestBody scanRequest scanRequest) {
+	public ResponseEntity<Receipt> addProduct(@RequestBody ScanRequest scanRequest) {
 		return ResponseEntity.ok(receiptService.addProduct(scanRequest.cartId, scanRequest.productId, scanRequest.quantity));
 	}
 
 	@PostMapping("remove")
-	public ResponseEntity<Receipt> removeProduct(@RequestBody scanRequest scanRequest) {
+	public ResponseEntity<Receipt> removeProduct(@RequestBody ScanRequest scanRequest) {
 		return ResponseEntity.ok(receiptService.removeProduct(scanRequest.cartId, scanRequest.productId, scanRequest.quantity));
 	}
 
 	@PostMapping("set")
-	public ResponseEntity<Receipt> setQuantity(@RequestBody scanRequest scanRequest) {
+	public ResponseEntity<Receipt> setQuantity(@RequestBody ScanRequest scanRequest) {
 		return ResponseEntity.ok(receiptService.setQuantity(scanRequest.cartId, scanRequest.productId, scanRequest.quantity));
 	}
 
