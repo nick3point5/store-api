@@ -11,8 +11,8 @@ import lombok.*;
 @Entity
 @Table(name = "carts")
 public class Cart {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "cart_id")
-	private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "cart_id")
+    private long id;
 }

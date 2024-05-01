@@ -1,12 +1,8 @@
 package com.store.storeAPI.carts;
 
-import com.store.storeAPI.carts.Cart;
-import com.store.storeAPI.carts.CartService;
 import com.store.storeAPI.receipts.Receipt;
-import com.store.storeAPI.receipts.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

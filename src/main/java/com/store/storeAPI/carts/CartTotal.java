@@ -11,6 +11,6 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 class CartTotal {
-	private int totalPrice;
-	private List<Receipt> receipts;
+    private int totalPrice;
+    private List<Receipt> receipts;
 }
