@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 @ToString
-class scanRequest {
+class ScanRequest {
 	Long cartId;
 	Long productId;
 	int quantity;

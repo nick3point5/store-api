@@ -21,9 +21,22 @@ public class Product {
 
 	@Column(name = "price")
 	private int price;
+	
+	@Column(name = "discount_amount")
+	private Integer discountAmount;
+	
+	@Column(name = "discount_price")
+	private Integer discountPrice;
 
 	public Product(String code, int price) {
 		this.code = code;
 		this.price = price;
+	}
+	
+	public Product(String code, int price, int discountAmount, int discountPrice) {
+		this.code = code;
+		this.price = price;
+		this.discountAmount = discountAmount;
+		this.discountPrice = discountPrice;
 	}
 }
