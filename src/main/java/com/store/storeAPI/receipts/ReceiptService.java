@@ -52,8 +52,6 @@ public class ReceiptService {
 				 .findByCartIdAndProductId(cartId, productId)
 				 .orElse(new Receipt(productId, 0, cartId));
 
-		 System.out.println(receipt);
-
 		 receipt.setQuantity(receipt.getQuantity()+quantity);
 
 		 return receiptRepository.save(receipt);
