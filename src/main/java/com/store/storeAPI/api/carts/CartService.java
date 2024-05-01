@@ -1,8 +1,8 @@
-package com.store.storeAPI.carts;
+package com.store.storeAPI.api.carts;
 
-import com.store.storeAPI.products.Product;
-import com.store.storeAPI.receipts.Receipt;
-import com.store.storeAPI.receipts.ReceiptRepository;
+import com.store.storeAPI.api.products.Product;
+import com.store.storeAPI.api.receipts.Receipt;
+import com.store.storeAPI.api.receipts.ReceiptRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

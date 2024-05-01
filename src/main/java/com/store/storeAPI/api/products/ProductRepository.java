@@ -1,4 +1,4 @@
-package com.store.storeAPI.products;
+package com.store.storeAPI.api.products;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,6 @@
-package com.store.storeAPI.receipts;
+package com.store.storeAPI.api.receipts;
 
-import com.store.storeAPI.products.Product;
+import com.store.storeAPI.api.products.Product;
 import jakarta.persistence.*;
 import lombok.*;
 

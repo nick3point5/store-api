@@ -1,11 +1,10 @@
-package com.store.storeAPI.products;
+package com.store.storeAPI.api.products;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {

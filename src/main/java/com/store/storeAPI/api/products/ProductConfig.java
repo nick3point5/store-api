@@ -1,4 +1,4 @@
-package com.store.storeAPI.products;
+package com.store.storeAPI.api.products;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

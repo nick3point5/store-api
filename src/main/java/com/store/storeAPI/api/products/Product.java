@@ -1,4 +1,4 @@
-package com.store.storeAPI.products;
+package com.store.storeAPI.api.products;
 
 import jakarta.persistence.*;
 import lombok.*;

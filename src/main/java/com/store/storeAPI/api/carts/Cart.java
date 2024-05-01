@@ -1,4 +1,4 @@
-package com.store.storeAPI.carts;
+package com.store.storeAPI.api.carts;
 
 import jakarta.persistence.*;
 import lombok.*;

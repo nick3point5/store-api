@@ -1,4 +1,4 @@
-package com.store.storeAPI.receipts;
+package com.store.storeAPI.api.receipts;
 
 
 import lombok.*;

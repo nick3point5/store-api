@@ -1,4 +1,4 @@
-package com.store.storeAPI.receipts;
+package com.store.storeAPI.api.receipts;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,17 +92,5 @@ public class ReceiptService {
         receipt.setQuantity(quantity);
 
         return receiptRepository.save(receipt);
-    }
-
-    public int getTotalPriceByCartId(long cartId) {
-        List<Receipt> receipts = receiptRepository.findByCartId(cartId);
-
-        int totalPrice = 0;
-
-        for (Receipt receipt : receipts) {
-            totalPrice += receipt.getQuantity() * receipt.getProduct().getPrice();
-        }
-
-        return totalPrice;
     }
 }

@@ -1,6 +1,6 @@
-package com.store.storeAPI.carts;
+package com.store.storeAPI.api.carts;
 
-import com.store.storeAPI.receipts.Receipt;
+import com.store.storeAPI.api.receipts.Receipt;
 import lombok.*;
 
 import java.util.List;
