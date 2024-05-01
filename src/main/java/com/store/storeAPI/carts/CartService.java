@@ -3,6 +3,7 @@ package com.store.storeAPI.carts;
 import com.store.storeAPI.receipts.Receipt;
 import com.store.storeAPI.receipts.ReceiptRepository;
 import jakarta.transaction.Transactional;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +61,7 @@ public class CartService {
 		return receiptRepository.findByCartId(cartId);
 	}
 
-	public Integer getTotalPriceByCartId(Long cartId) {
+	public CartTotal getTotalPriceByCartId(Long cartId) {
 		List<Receipt> receipts = receiptRepository.findByCartId(cartId);
 
 		int totalPrice = 0;
@@ -69,6 +70,6 @@ public class CartService {
 			totalPrice += receipt.getQuantity() * receipt.getProduct().getPrice();
 		}
 
-		return totalPrice;
+		return new CartTotal(totalPrice, receipts);
 	}
 }

@@ -28,7 +28,7 @@ public class CartController {
 	}
 
 	@GetMapping("total/{cartId}")
-	public ResponseEntity<Integer> getTotalPriceByCartId(@PathVariable("cartId") Long cartId) {
+	public ResponseEntity<CartTotal> getTotalPriceByCartId(@PathVariable("cartId") Long cartId) {
 		return ResponseEntity.ok(cartService.getTotalPriceByCartId(cartId));
 	}
 
