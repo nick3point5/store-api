@@ -15,7 +15,10 @@ public class ProductController {
 
 	@Operation(summary = "Get all products", description = "Fetch all products from the database", tags = {"product"})
 	@GetMapping(produces = {"application/json"})
-	public ResponseEntity<List<Product>> getAllProducts() {
+	public ResponseEntity<List<Product>> getAllProducts(@RequestParam(name = "code", required=false) String code) {
+		if(code != null && !code.isEmpty()) {
+			return ResponseEntity.ok(productService.getProductByCode(code));
+		}
 		return ResponseEntity.ok(productService.getAllProducts());
 	}
 
@@ -23,13 +26,6 @@ public class ProductController {
 	@GetMapping(value = "{id}", produces = {"application/json"})
 	public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
 		return ResponseEntity.ok(productService.getProductById(id));
-	}
-
-	@Operation(summary = "Get a product by code", description = "Fetch product from the database by its code", tags = {"product"})
-	@GetMapping(params = "code", produces = {"application/json"})
-	@ResponseBody
-	public ResponseEntity<Product> getProductByCode(@RequestParam(name = "code", required=false) String code) {
-		return ResponseEntity.ok(productService.getProductByCode(code));
 	}
 
 	@Operation(summary = "Add a new product", description = "Add a new product to the database", tags = {"product"})

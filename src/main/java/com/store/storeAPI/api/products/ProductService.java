@@ -27,12 +27,12 @@ public class ProductService {
                 );
     }
 
-    public Product getProductByCode(String code) {
+    public List<Product> getProductByCode(String code) {
         return productRepository
-                .findByCode(code)
-                .orElseThrow(
-                        () -> new IllegalStateException("Product with code " + code + " does not exist")
-                );
+                .findByCode(code);
+//                .orElseThrow(
+//                        () -> new IllegalStateException("Product with code " + code + " does not exist")
+//                );
     }
 
     public Product addProduct(Product product) {
