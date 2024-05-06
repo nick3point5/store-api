@@ -1,5 +1,6 @@
 package com.store.storeAPI.api.carts;
 
+import com.store.storeAPI.api.discounts.Discount;
 import com.store.storeAPI.api.products.Product;
 import com.store.storeAPI.api.receipts.Receipt;
 import com.store.storeAPI.api.receipts.ReceiptRepository;
@@ -68,13 +69,14 @@ public class CartService {
 
         for (Receipt receipt : receipts) {
             Product product = receipt.getProduct();
-            if (product.getDiscountAmount() == null || product.getDiscountPrice() == null) {
+            Discount discount = product.getDiscount();
+            if (discount.getAmount() == null || discount.getPrice() == null) {
                 totalPrice += receipt.getQuantity() * product.getPrice();
             } else {
-                int discountQuantity = receipt.getQuantity() / product.getDiscountAmount();
-                int fullPriceQuantity = receipt.getQuantity() - discountQuantity * product.getDiscountAmount();
+                int discountQuantity = receipt.getQuantity() / discount.getAmount();
+                int fullPriceQuantity = receipt.getQuantity() - discountQuantity * discount.getAmount();
                 System.out.println(fullPriceQuantity);
-                totalPrice += fullPriceQuantity * product.getPrice() + discountQuantity * product.getDiscountPrice();
+                totalPrice += fullPriceQuantity * product.getPrice() + discountQuantity * discount.getPrice();
 
             }
         }

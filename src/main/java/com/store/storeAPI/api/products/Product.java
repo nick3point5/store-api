@@ -1,5 +1,6 @@
 package com.store.storeAPI.api.products;
 
+import com.store.storeAPI.api.discounts.Discount;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,27 +17,18 @@ public class Product {
     @Column(name = "product_id")
     private long id;
 
-    @Column(name = "code")
+    @Column(name = "code", columnDefinition = "VARCHAR(127)")
     private String code;
 
     @Column(name = "price")
     private int price;
 
-    @Column(name = "discount_amount")
-    private Integer discountAmount;
-
-    @Column(name = "discount_price")
-    private Integer discountPrice;
+    @JoinColumn(name = "discount_id", referencedColumnName = "discount_id", insertable = false, updatable = false)
+    @ManyToOne
+    private Discount discount;
 
     public Product(String code, int price) {
         this.code = code;
         this.price = price;
-    }
-
-    public Product(String code, int price, int discountAmount, int discountPrice) {
-        this.code = code;
-        this.price = price;
-        this.discountAmount = discountAmount;
-        this.discountPrice = discountPrice;
     }
 }

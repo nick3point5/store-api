@@ -30,9 +30,6 @@ public class ProductService {
     public List<Product> getProductByCode(String code) {
         return productRepository
                 .findByCode(code);
-//                .orElseThrow(
-//                        () -> new IllegalStateException("Product with code " + code + " does not exist")
-//                );
     }
 
     public Product addProduct(Product product) {
