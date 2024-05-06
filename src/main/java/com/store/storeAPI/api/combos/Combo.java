@@ -23,12 +23,12 @@ public class Combo {
     @Column(name = "product_id")
     private long productId;
 
+    @Column(name = "discount_id")
+    private long discountId;
+
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", insertable = false, updatable = false)
     @OneToOne
     private Product product;
-
-    @Column(name = "discount_id")
-    private long discountId;
 
     public Combo(int amount, long productId, long discountId) {
         this.amount = amount;

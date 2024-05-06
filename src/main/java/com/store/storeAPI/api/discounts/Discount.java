@@ -43,10 +43,10 @@ public class Discount {
     @Column(name = "product_id")
     private Long productId;
 
-    @JoinTable(name = "discount_combos")
+
+    @JoinColumn(name = "discount_id", referencedColumnName = "discount_id", insertable = false, updatable = false)
     @OneToMany
     private List<Combo> combos;
-
     public Discount(int amount, int price, Type type, Long productId) {
         this.amount = amount;
         this.price = price;
@@ -54,11 +54,5 @@ public class Discount {
         this.productId = productId;
     }
 
-//    public Discount(int amount, int price, Type type, Long productId, Long comboId) {
-//        this.amount = amount;
-//        this.price = price;
-//        this.type = type;
-//        this.productId = productId;
-//        this.comboId = comboId;
-//    }
+
 }

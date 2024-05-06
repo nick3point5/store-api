@@ -12,7 +12,8 @@ public class ComboSeed {
     @Bean
     CommandLineRunner comboCommandLineRunner(ComboService comboService) {
         return args -> {
-            comboService.addCombo(new Combo(4, 1L, 4L ));
+            comboService.addCombo(new Combo(1, 1L, 5L ));
+            comboService.addCombo(new Combo(1, 2L, 5L ));
 
         };
     }

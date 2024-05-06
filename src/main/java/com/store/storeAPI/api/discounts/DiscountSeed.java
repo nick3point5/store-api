@@ -1,8 +1,6 @@
 package com.store.storeAPI.api.discounts;
 
 
-import com.store.storeAPI.api.discounts.Discount;
-import com.store.storeAPI.api.discounts.DiscountService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +14,7 @@ public class DiscountSeed {
             discountService.addDiscount(new Discount(6, 600, Discount.Type.PERCENT, 3L));
             discountService.addDiscount(new Discount(5, 1100, Discount.Type.BULK, 2L));
             discountService.addDiscount(new Discount(10, 1000, Discount.Type.BULK, 2L));
-
+            discountService.addDiscount(new Discount(1, 0, Discount.Type.COMBO, 4L));
         };
     }
 }

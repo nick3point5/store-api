@@ -1,5 +1,6 @@
 package com.store.storeAPI.api.carts;
 
+import com.store.storeAPI.api.combos.Combo;
 import com.store.storeAPI.api.discounts.Discount;
 import com.store.storeAPI.api.products.Product;
 import com.store.storeAPI.api.receipts.Receipt;
@@ -73,7 +74,7 @@ public class CartService {
             int minPrice = product.getPrice() * receipt.getQuantity();
 
             for (Discount discount : product.getDiscounts()) {
-                 int discountPrice = getDiscountPrice(discount, receipt);
+                 int discountPrice = getDiscountPrice(discount, receipt, receipts);
                  if(discountPrice < minPrice) {
                      minPrice = discountPrice;
                  }
@@ -85,14 +86,14 @@ public class CartService {
         return new CartTotal(totalPrice, receipts);
     }
 
-    public int getDiscountPrice(Discount discount, Receipt receipt) {
+    public int getDiscountPrice(Discount discount, Receipt receipt, List<Receipt> receipts) {
         switch (discount.getType()) {
             case PERCENT:
                 return getPercentPrice(discount, receipt);
             case BULK:
                 return getBulkPrice(discount, receipt);
-//            case COMBO:
-//                return discount.getPrice();
+            case COMBO:
+                return getComboPrice(discount, receipt, receipts);
             default:
                 return 0;
         }
@@ -115,5 +116,29 @@ public class CartService {
             return discount.getPrice() * receipt.getQuantity();
         }
         return receipt.getProduct().getPrice() * receipt.getQuantity();
+    }
+
+    public int getComboPrice(Discount discount, Receipt discountReceipt, List<Receipt> receipts) {
+        List<Combo> combos = discount.getCombos();
+
+        int comboCount = Integer.MAX_VALUE;
+
+        for (Combo combo : combos) {
+            long productId = combo.getProductId();
+            for (Receipt receipt : receipts) {
+                if (receipt.getProductId() == productId) {
+                    int set = receipt.getQuantity() / combo.getAmount();
+                    if( set < comboCount ) {
+                        comboCount = set;
+                    }
+                }
+            }
+        }
+
+        if (comboCount == combos.size()) {
+            return discount.getPrice() * discountReceipt.getQuantity();
+        }
+
+        return 0;
     }
 }
