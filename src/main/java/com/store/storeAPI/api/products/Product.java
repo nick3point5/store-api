@@ -4,6 +4,8 @@ import com.store.storeAPI.api.discounts.Discount;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,9 +25,9 @@ public class Product {
     @Column(name = "price")
     private int price;
 
-    @JoinColumn(name = "discount_id", referencedColumnName = "discount_id", insertable = false, updatable = false)
-    @ManyToOne
-    private Discount discount;
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id", insertable = false, updatable = false)
+    @OneToMany
+    private List<Discount> discounts;
 
     public Product(String code, int price) {
         this.code = code;

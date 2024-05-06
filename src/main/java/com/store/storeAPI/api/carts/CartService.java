@@ -69,18 +69,51 @@ public class CartService {
 
         for (Receipt receipt : receipts) {
             Product product = receipt.getProduct();
-            Discount discount = product.getDiscount();
-            if (discount.getAmount() == null || discount.getPrice() == null) {
-                totalPrice += receipt.getQuantity() * product.getPrice();
-            } else {
-                int discountQuantity = receipt.getQuantity() / discount.getAmount();
-                int fullPriceQuantity = receipt.getQuantity() - discountQuantity * discount.getAmount();
-                System.out.println(fullPriceQuantity);
-                totalPrice += fullPriceQuantity * product.getPrice() + discountQuantity * discount.getPrice();
 
+            int minPrice = product.getPrice() * receipt.getQuantity();
+
+            for (Discount discount : product.getDiscounts()) {
+                 int discountPrice = getDiscountPrice(discount, receipt);
+                 if(discountPrice < minPrice) {
+                     minPrice = discountPrice;
+                 }
             }
+
+            totalPrice += minPrice;
         }
 
         return new CartTotal(totalPrice, receipts);
+    }
+
+    public int getDiscountPrice(Discount discount, Receipt receipt) {
+        switch (discount.getType()) {
+            case PERCENT:
+                return getPercentPrice(discount, receipt);
+            case BULK:
+                return getBulkPrice(discount, receipt);
+//            case COMBO:
+//                return discount.getPrice();
+            default:
+                return 0;
+        }
+    }
+
+    public int getPercentPrice(Discount discount, Receipt receipt) {
+        Product product = receipt.getProduct();
+
+        int price = 0;
+
+        int discountQuantity = receipt.getQuantity() / discount.getAmount();
+        int fullPriceQuantity = receipt.getQuantity() - discountQuantity * discount.getAmount();
+        price += fullPriceQuantity * product.getPrice() + discountQuantity * discount.getPrice();
+
+        return price;
+    }
+
+    public int getBulkPrice(Discount discount, Receipt receipt) {
+        if (receipt.getQuantity() >= discount.getAmount()) {
+            return discount.getPrice() * receipt.getQuantity();
+        }
+        return receipt.getProduct().getPrice() * receipt.getQuantity();
     }
 }
