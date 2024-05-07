@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -121,24 +122,53 @@ public class CartService {
     public int getComboPrice(Discount discount, Receipt discountReceipt, List<Receipt> receipts) {
         List<Combo> combos = discount.getCombos();
 
-        int comboCount = Integer.MAX_VALUE;
+
+        HashMap<Long, Integer> comboMap = new HashMap<>();
+        HashMap<Long, Integer> comboCountMap = new HashMap<>();
 
         for (Combo combo : combos) {
-            long productId = combo.getProductId();
-            for (Receipt receipt : receipts) {
-                if (receipt.getProductId() == productId) {
-                    int set = receipt.getQuantity() / combo.getAmount();
-                    if( set < comboCount ) {
-                        comboCount = set;
-                    }
-                }
+
+            comboMap.put(combo.getProductId(), combo.getAmount());
+            comboCountMap.put(combo.getProductId(), 0);
+        }
+
+        HashMap<Long, Integer> productQuantityMap = new HashMap<>();
+        for (Receipt receipt : receipts) {
+            productQuantityMap.put(receipt.getProduct().getId(), receipt.getQuantity());
+        }
+
+
+        for (Long productId : comboMap.keySet()) {
+            if (productQuantityMap.containsKey(productId)) {
+                int quantity = productQuantityMap.get(productId);
+
+                int amount = comboMap.get(productId);
+
+                int comboCount = quantity / amount;
+
+                comboCountMap.put(productId, comboCount);
+
             }
         }
 
-        if (comboCount == combos.size()) {
-            return discount.getPrice() * discountReceipt.getQuantity();
+
+        System.out.println("combos");
+        System.out.println(comboCountMap.size());
+        int minCombo = Integer.MAX_VALUE;
+        for (Long productId : comboCountMap.keySet()) {
+            int comboCount = comboCountMap.get(productId);
+            System.out.println(productId);
+            System.out.println(comboCount);
+            if(comboCount == 0) {
+                return discountReceipt.getProduct().getPrice() * discountReceipt.getQuantity();
+            }
+
+            if(comboCount < minCombo) {
+                minCombo = comboCount;
+            }
         }
 
-        return 0;
+
+        return discount.getPrice() * (discountReceipt.getQuantity() - minCombo);
     }
 }

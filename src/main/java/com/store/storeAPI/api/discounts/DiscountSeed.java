@@ -4,10 +4,12 @@ package com.store.storeAPI.api.discounts;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 @Configuration
 public class DiscountSeed {
     @Bean
+    @Order(2)
     CommandLineRunner discountCommandLineRunner(DiscountService discountService) {
         return args -> {
             discountService.addDiscount(new Discount(4, 700, Discount.Type.PERCENT, 1L));

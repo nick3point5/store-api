@@ -19,7 +19,7 @@ public class Product {
     @Column(name = "product_id")
     private long id;
 
-    @Column(name = "code", columnDefinition = "VARCHAR(127)")
+    @Column(name = "code")
     private String code;
 
     @Column(name = "price")
