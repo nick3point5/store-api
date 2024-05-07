@@ -15,8 +15,8 @@ public class ProductController {
 
 	@Operation(summary = "Get all products", description = "Fetch all products from the database", tags = {"product"})
 	@GetMapping(produces = {"application/json"})
-	public ResponseEntity<List<Product>> getAllProducts(@RequestParam(name = "code", required=false) String code) {
-		if(code != null && !code.isEmpty()) {
+	public ResponseEntity<List<Product>> getAllProducts(@RequestParam(name = "code", required = false) String code) {
+		if (code != null && !code.isEmpty()) {
 			return ResponseEntity.ok(productService.getProductByCode(code));
 		}
 		return ResponseEntity.ok(productService.getAllProducts());

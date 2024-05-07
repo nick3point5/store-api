@@ -10,8 +10,8 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 class ScanRequest {
-    Long cartId;
-    Long productId;
-    int quantity;
+	Long cartId;
+	Long productId;
+	int quantity;
 }
 

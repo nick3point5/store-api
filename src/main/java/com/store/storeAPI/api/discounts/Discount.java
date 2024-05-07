@@ -15,44 +15,39 @@ import java.util.List;
 @Entity
 @Table(name = "discounts")
 public class Discount {
-    @Getter
-    @AllArgsConstructor
-    @ToString
-    public enum Type {
-        PERCENT(1),
-        BULK(2),
-        COMBO(3);
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "discount_id")
+	private long id;
+	@Column(name = "amount")
+	private int amount;
+	@Column(name = "price")
+	private int price;
+	@Column(name = "type")
+	private Type type;
+	@Column(name = "product_id")
+	private Long productId;
+	@JoinColumn(name = "discount_id", referencedColumnName = "discount_id", insertable = false, updatable = false)
+	@OneToMany
+	private List<Combo> combos;
 
-        private final int value;
-    }
+	public Discount(int amount, int price, Type type, Long productId) {
+		this.amount = amount;
+		this.price = price;
+		this.type = type;
+		this.productId = productId;
+	}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "discount_id")
-    private long id;
+	@Getter
+	@AllArgsConstructor
+	@ToString
+	public enum Type {
+		PERCENT(1),
+		BULK(2),
+		COMBO(3);
 
-    @Column(name = "amount")
-    private int amount;
-
-    @Column(name = "price")
-    private int price;
-
-    @Column(name = "type")
-    private Type type;
-
-    @Column(name = "product_id")
-    private Long productId;
-
-    @JoinColumn(name = "discount_id", referencedColumnName = "discount_id", insertable = false, updatable = false)
-    @OneToMany
-    private List<Combo> combos;
-
-    public Discount(int amount, int price, Type type, Long productId) {
-        this.amount = amount;
-        this.price = price;
-        this.type = type;
-        this.productId = productId;
-    }
+		private final int value;
+	}
 
 
 }
